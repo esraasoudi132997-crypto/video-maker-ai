@@ -1,1 +1,242 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Maker AI</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #111126;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  padding: 22px;
+  text-align: center;
+  background: linear-gradient(120deg,#7928ca,#ff4ecd,#16c9df);
+}
+
+header h1 {
+  font-size: 28px;
+}
+
+header p {
+  margin-top: 8px;
+}
+
+.container {
+  max-width: 750px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: #20203c;
+  padding: 22px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px #0005;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #d9a5ff;
+}
+
+label {
+  display: block;
+  margin: 16px 0 8px;
+  font-weight: bold;
+}
+
+textarea, select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #555477;
+  border-radius: 12px;
+  background: #131329;
+  color: white;
+  font-size: 16px;
+}
+
+textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(100deg,#8b35e9,#ed45b5,#13bdd0);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+#result {
+  display: none;
+  margin-top: 25px;
+  padding: 18px;
+  background: #15152e;
+  border-radius: 15px;
+}
+
+.scene {
+  padding: 14px;
+  margin-top: 12px;
+  background: #29294b;
+  border-radius: 12px;
+  line-height: 1.8;
+}
+
+.scene strong {
+  color: #43dce8;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎬 Video Maker AI</h1>
+  <p>حوّل فكرتك إلى فيديو بالذكاء الاصطناعي</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>✨ اصنع فيديوك الآن</h2>
+
+    <label>اكتب فكرة الفيديو</label>
+    <textarea id="idea" placeholder="اكتب قصتك أو فكرتك هنا..."></textarea>
+
+    <label>لغة الفيديو</label>
+    <select id="language">
+      <option>العربية</option>
+      <option>English</option>
+      <option>Français</option>
+      <option>Español</option>
+      <option>Deutsch</option>
+      <option>Türkçe</option>
+      <option>中文</option>
+      <option>日本語</option>
+      <option>كل اللغات</option>
+    </select>
+
+    <label>نوع الفيديو</label>
+    <select id="style">
+      <option>أنيمي</option>
+      <option>3D</option>
+      <option>واقعي سينمائي</option>
+      <option>كرتوني</option>
+    </select>
+
+    <label>مدة الفيديو</label>
+    <select id="duration">
+      <option>30 ثانية</option>
+      <option>دقيقة واحدة</option>
+      <option>دقيقتان</option>
+      <option>5 دقائق</option>
+    </select>
+
+    <label>مقاس الفيديو</label>
+    <select id="ratio">
+      <option>عمودي 9:16</option>
+      <option>أفقي 16:9</option>
+      <option>مربع 1:1</option>
+    </select>
+
+    <button onclick="createVideo()">
+      🚀 جهّز مشروع الفيديو
+    </button>
+
+    <div id="result">
+      <h2>مشاهد الفيديو</h2>
+      <div id="scenes"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Video Maker AI © 2026
+</footer>
+
+<script>
+function createVideo() {
+  const idea = document.getElementById("idea").value.trim();
+
+  if (!idea) {
+    alert("من فضلك اكتب فكرة الفيديو أولاً");
+    return;
+  }
+
+  const language = document.getElementById("language").value;
+  const style = document.getElementById("style").value;
+  const duration = document.getElementById("duration").value;
+  const ratio = document.getElementById("ratio").value;
+
+  const scenes = document.getElementById("scenes");
+  scenes.innerHTML = "";
+
+  const info = document.createElement("p");
+  info.textContent =
+    "الفكرة: " + idea +
+    " | اللغة: " + language +
+    " | الأسلوب: " + style +
+    " | المدة: " + duration +
+    " | المقاس: " + ratio;
+
+  scenes.appendChild(info);
+
+  for (let i = 1; i <= 4; i++) {
+    const scene = document.createElement("div");
+    scene.className = "scene";
+
+    const title = document.createElement("strong");
+    title.textContent = "المشهد " + i;
+
+    const description = document.createElement("p");
+    description.textContent =
+      i === 1
+      ? "بداية القصة والتعريف بالشخصيات والمكان."
+      : i === 4
+      ? "نهاية القصة والوصول إلى الخاتمة."
+      : "تطور الأحداث واستمرار القصة.";
+
+    scene.appendChild(title);
+    scene.appendChild(description);
+    scenes.appendChild(scene);
+  }
+
+  document.getElementById("result").style.display = "block";
+}
+</script>
+
+</body>
+</html>
+
+
